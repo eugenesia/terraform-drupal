@@ -54,7 +54,7 @@ phpVer=7.2
 apt-get install -y \
   libjpeg-dev \
   libpng-dev \
-  php$phpVer-{gd,mbstring,xml,zip}
+  php$phpVer-{curl,gd,mbstring,xml,zip}
 
 
 #############################################
