@@ -20,5 +20,12 @@ echo "$swapFile swap swap defaults 0 0" | sudo tee -a /etc/fstab
 
 echo 'vm.swappiness=10' >> /etc/sysctl.conf
 
+#############################################
+# Lamp server
+
+apt update
+apt install tasksel
+tasksel install lamp-server
+
 
 set +vx
