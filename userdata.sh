@@ -24,7 +24,7 @@ echo 'vm.swappiness=10' >> /etc/sysctl.conf
 # Lamp server
 
 apt-get update
-apt-get install -y lamp-server
+apt-get install -y lamp-server^
 
 
 set +vx
