@@ -2,6 +2,6 @@ variable do_token {
   description = "DigitalOcean token."
 }
 
-variable vnc_password {
-  description = "VNC password on droplet."
+variable swap_size {
+  description = "Size of swapfile in gigabytes."
 }

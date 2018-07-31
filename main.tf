@@ -5,17 +5,10 @@ provider digitalocean {
 
 # Create a droplet.
 resource digitalocean_droplet desktop {
-  image  = "ubuntu-18-04-x64"
-  name   = "ubuntu-desktop"
-  region = "lon1"
-
-  # size = "s-2vcpu-2gb"
-  # size = "s-3vcpu-1gb"
-  # size = "2gb"
-
-  # CPU-optimised.
-  # size = "c-1vcpu-2gb"
-  size = "c-4"
+  image     = "ubuntu-18-04-x64"
+  name      = "ubuntu-desktop"
+  region    = "lon1"
+  size      = "512mb"                                   # $5/mth
   ssh_keys  = [4066671, 17252294]
   user_data = "${data.template_file.userdata.rendered}"
 }
@@ -24,7 +17,7 @@ resource digitalocean_droplet desktop {
 resource digitalocean_record desktop {
   domain = "do.eugenesia.net"
   type   = "A"
-  name   = "desktop"
+  name   = "drupal1"
   value  = "${digitalocean_droplet.desktop.ipv4_address}"
   ttl    = 180
 }
@@ -34,6 +27,7 @@ data template_file userdata {
   template = "${file("userdata.sh")}"
 
   vars {
-    vnc_password = "${var.vnc_password}"
+    # Swapfile of 1GB.
+    swap_size = "1"
   }
 }
