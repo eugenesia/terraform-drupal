@@ -28,6 +28,6 @@ data template_file userdata {
 
   vars {
     # Swapfile of 1GB.
-    swap_size = "1"
+    swap_size = "${var.swap_size}"
   }
 }
