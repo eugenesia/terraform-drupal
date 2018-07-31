@@ -35,11 +35,17 @@ apt-get install -y \
 
 #############################################
 # Drupal
+# Install Drupal using Composer https://github.com/drupal-composer/drupal-project
+
+drupalRoot=/var/www/drupal
 
 composer create-project \
   drupal-composer/drupal-project:8.x-dev \
-  /var/www/drupal \
+  $drupalRoot \
   --stability dev \
   --no-interaction
+
+cd $drupalRoot
+composer require drupal/devel:~1.0
 
 set +vx
