@@ -10,7 +10,7 @@ export USER=root
 
 # Add swap: https://help.ubuntu.com/community/SwapFaq
 swapFile=/mnt/${swap_size}GiB.swap
-fallocate -l ${swap_size}1g $swapFile
+fallocate -l ${swap_size}g $swapFile
 chmod 600 $swapFile
 mkswap $swapFile
 swapon $swapFile
