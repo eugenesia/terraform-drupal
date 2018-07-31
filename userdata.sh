@@ -33,6 +33,30 @@ apt-get install -y \
   composer \
   git
 
+
+#############################################
+# Apache
+
+a2enmod rewrite
+
+
+#############################################
+# PHP
+
+# PPA for PHP.
+add-apt-repository \
+  ppa:ondrej/php \
+  ppa:ondrej/apache2
+
+apt-get update
+
+phpVer=7.2
+apt-get install -y \
+  libjpeg-dev \
+  libpng-dev \
+  php$phpVer-{gd,xml,zip}
+
+
 #############################################
 # Drupal
 # Install Drupal using Composer https://github.com/drupal-composer/drupal-project
