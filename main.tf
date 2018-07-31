@@ -4,9 +4,9 @@ provider digitalocean {
 }
 
 # Create a droplet.
-resource digitalocean_droplet desktop {
-  image     = "ubuntu-18-04-x64"
-  name      = "ubuntu-desktop"
+resource digitalocean_droplet server {
+  image     = "${var.server_image}"
+  name      = "${var.server_name}"
   region    = "lon1"
   size      = "512mb"                                   # $5/mth
   ssh_keys  = [4066671, 17252294]
@@ -14,11 +14,11 @@ resource digitalocean_droplet desktop {
 }
 
 # Put the droplet under a domain.
-resource digitalocean_record desktop {
+resource digitalocean_record server {
   domain = "do.eugenesia.net"
   type   = "A"
-  name   = "drupal1"
-  value  = "${digitalocean_droplet.desktop.ipv4_address}"
+  name   = "${var.server_name}"
+  value  = "${digitalocean_droplet.server.ipv4_address}"
   ttl    = 180
 }
 
