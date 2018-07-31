@@ -24,7 +24,7 @@ echo 'vm.swappiness=10' >> /etc/sysctl.conf
 # Lamp server
 
 apt update
-apt install tasksel
+apt install -y tasksel
 tasksel install lamp-server
 
 
