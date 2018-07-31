@@ -26,5 +26,20 @@ echo 'vm.swappiness=10' >> /etc/sysctl.conf
 apt-get update
 apt-get install -y lamp-server^
 
+#############################################
+# Dev tools
+
+apt-get install -y \
+  composer \
+  git
+
+#############################################
+# Drupal
+
+composer create-project \
+  drupal-composer/drupal-project:8.x-dev \
+  /var/www/drupal \
+  --stability dev \
+  --no-interaction
 
 set +vx
