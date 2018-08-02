@@ -31,6 +31,8 @@ runcmd:
   - export HOME=/root
   - composer global require consolidation/cgr
   - echo PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
+  # Drush
+  - cgr drush/drush
 
 swap:
   filename: /swap.img
