@@ -21,3 +21,11 @@ variable php_version {
   description = "PHP version."
   default     = "7.2"
 }
+
+variable mysql_password {
+  description = "MySQL password."
+}
+
+variable drupal_password {
+  description = "Drupal password for root user."
+}

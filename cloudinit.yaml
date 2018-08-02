@@ -36,7 +36,7 @@ runcmd:
   - cgr drush/drush
   # MySQL setup
   - mysql -e 'CREATE DATABASE drupal'
-  - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''drupal'\'
+  - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''${mysql_password}'\'
 
 swap:
   filename: /swap.img
