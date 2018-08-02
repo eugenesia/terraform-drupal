@@ -3,3 +3,7 @@ swap:
   filename: /swap.img
   size: 1000000000
   maxsize: 2000000000
+
+runcmd:
+  # Change swappiness
+  - echo 'vm.swappiness=10' >> /etc/sysctl.conf
