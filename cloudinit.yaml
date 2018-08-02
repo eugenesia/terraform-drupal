@@ -6,11 +6,20 @@ swap:
 
 apt:
   packages:
+    # Lamp
+    - lamp-server^
+
+    # Dev tools
+    - composer
+    - git
+
+    # PHP extensions
     - php${php_ver}-curl
     - php${php_ver}-gd
     - php${php_ver}-mbstring
     - php${php_ver}-xml
     - php${php_ver}-zip
+
   package_update: true
   # Add PHP/Apache sources.
   sources:
