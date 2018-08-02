@@ -28,6 +28,7 @@ runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
   # Composer
+  - export HOME=/root
   - composer global require consolidation/cgr
   - echo PATH="$(composer config home)/vendor/bin:$PATH" >> ~/.bashrc
 
