@@ -36,9 +36,10 @@ runcmd:
   # Drush
   - cgr drush/drush
   # MySQL setup
-  - mysql -e 'CREATE DATABASE drupal'
-  - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''${mysql_password}'\'
-  # Drupal
+  # - mysql -e 'CREATE DATABASE drupal'
+  # - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''${mysql_password}'\'
+
+  # Drupal - download
   - export DRUPAL_ROOT=/var/www/drupal
   - composer create-project
     drupal-composer/drupal-project:8.x-dev
@@ -47,6 +48,14 @@ runcmd:
     --no-interaction
   - cd $DRUPAL_ROOT
   - composer require drupal/devel:~1.0
+
+  # Drupal - install
+  - drush site:install
+    --db-url localhost/drupal
+    --db-su root
+    --account-name root
+    --account-pass ${drupal_password}
+
 
 swap:
   filename: /swap.img
