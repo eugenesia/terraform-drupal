@@ -77,6 +77,6 @@ write_files:
         <Directory /var/www/drupal/web>
           AllowOverride all
         </Directory>
-        ErrorLog $APACHE_LOG_DIR/drupal_error.log
-        CustomLog $APACHE_LOG_DIR/drupal_access.log combined
+        ErrorLog $${APACHE_LOG_DIR}/drupal_error.log
+        CustomLog $${APACHE_LOG_DIR}/drupal_access.log combined
       </VirtualHost>
