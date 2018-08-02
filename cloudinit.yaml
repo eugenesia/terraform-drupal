@@ -58,7 +58,7 @@ runcmd:
   # Apache
   - a2enmod rewrite
   - a2ensite drupal
-  - service apache2 reload
+  - systemctl restart apache2
   
 
 swap:
