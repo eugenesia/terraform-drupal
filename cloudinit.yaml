@@ -30,7 +30,7 @@ runcmd:
   # Composer
   - export HOME=/root
   - composer global require consolidation/cgr
-  - echo PATH="$(composer config home)/vendor/bin:$PATH" >> ~/.bashrc
+  - echo PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
 
 swap:
   filename: /swap.img
