@@ -9,7 +9,7 @@ apt:
   # Add PHP/Apache sources.
   sources:
     source1:
-      source: 'ppa:ppa:ondrej/php'
+      source: 'ppa:ondrej/php'
     source2:
       source: 'ppa:ondrej/apache2'
 
