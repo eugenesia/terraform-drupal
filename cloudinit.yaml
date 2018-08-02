@@ -27,6 +27,9 @@ packages:
 runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
+  # Composer
+  - composer global require consolidation/cgr
+  - echo PATH="$(composer config home)/vendor/bin:$PATH" >> ~/.bashrc
 
 swap:
   filename: /swap.img
