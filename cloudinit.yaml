@@ -1,27 +1,26 @@
 #cloud-config
 apt:
-  packages:
-    # Lamp
-    - lamp-server^
-
-    # Dev tools
-    - composer
-    - git
-
-    # PHP extensions
-    - php${php_ver}-curl
-    - php${php_ver}-gd
-    - php${php_ver}-mbstring
-    - php${php_ver}-xml
-    - php${php_ver}-zip
-
-  package_update: true
   # Add PHP/Apache sources.
   sources:
     source1:
       source: 'ppa:ondrej/php'
     source2:
       source: 'ppa:ondrej/apache2'
+
+packages:
+  # Lamp
+  - lamp-server^
+
+  # Dev tools
+  - composer
+  - git
+
+  # PHP extensions
+  - php${php_ver}-curl
+  - php${php_ver}-gd
+  - php${php_ver}-mbstring
+  - php${php_ver}-xml
+  - php${php_ver}-zip
 
 runcmd:
   # Change swappiness
