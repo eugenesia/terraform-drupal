@@ -4,6 +4,15 @@ swap:
   size: ${swap_bytes}
   maxsize: ${swap_bytes_max}
 
+apt:
+  package_update: true
+  # Add PHP/Apache sources.
+  sources:
+    source1:
+      source: 'ppa:ppa:ondrej/php'
+    source2:
+      source: 'ppa:ondrej/apache2'
+
 runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
