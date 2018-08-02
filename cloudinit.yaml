@@ -1,9 +1,4 @@
 #cloud-config
-swap:
-  filename: /swap.img
-  size: ${swap_bytes}
-  maxsize: ${swap_bytes_max}
-
 apt:
   packages:
     # Lamp
@@ -31,3 +26,8 @@ apt:
 runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
+
+swap:
+  filename: /swap.img
+  size: ${swap_bytes}
+  maxsize: ${swap_bytes_max}
