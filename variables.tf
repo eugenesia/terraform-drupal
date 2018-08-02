@@ -4,7 +4,7 @@ variable do_token {
 
 variable swap_size {
   description = "Size of swapfile in gigabytes."
-  default     = "2"
+  default     = 1
 }
 
 variable server_image {

@@ -28,6 +28,10 @@ data template_file userdata {
   template = "${file("cloudinit.yaml")}"
 
   vars {
-    # Swapfile of 1GB.  # swap_size = "${var.swap_size}"
+    # Convert swapfile size from GB to bytes.
+    swap_bytes = "${var.swap_size * 1073741824}"
+
+    # Allow it to grow to another GB.
+    swap_bytes_max = "${(var.swap_size +1) * 1073741824}"
   }
 }

@@ -1,8 +1,8 @@
 #cloud-config
 swap:
   filename: /swap.img
-  size: 1000000000
-  maxsize: 2000000000
+  size: ${swap_bytes}
+  maxsize: ${swap_bytes_max}
 
 runcmd:
   # Change swappiness
