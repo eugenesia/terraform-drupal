@@ -9,6 +9,7 @@ apt:
 
 packages:
   # Lamp
+  - apache2
   - apache2-bin
   - lamp-server^
 
