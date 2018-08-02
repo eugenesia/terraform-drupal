@@ -52,7 +52,6 @@ runcmd:
   # Drupal - install
   - drush site:install
     --db-url 'mysql://root@localhost/drupal'
-    --db-su root
     --account-name root
     --account-pass ${drupal_password}
 
