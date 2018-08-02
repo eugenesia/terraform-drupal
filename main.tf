@@ -24,10 +24,10 @@ resource digitalocean_record server {
 
 # Render userdata.sh with variables.
 data template_file userdata {
-  template = "${file("userdata.sh")}"
+  # template = "${file("userdata.sh")}"
+  template = "${file("cloudinit.yaml")}"
 
   vars {
-    # Swapfile of 1GB.
-    swap_size = "${var.swap_size}"
+    # Swapfile of 1GB.  # swap_size = "${var.swap_size}"
   }
 }

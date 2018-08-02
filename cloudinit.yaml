@@ -1,0 +1,5 @@
+#cloud-config
+swap:
+  filename: /swap.img
+  size: 1000000000
+  maxsize: 2000000000
