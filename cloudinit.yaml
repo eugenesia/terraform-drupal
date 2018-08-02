@@ -37,6 +37,15 @@ runcmd:
   # MySQL setup
   - mysql -e 'CREATE DATABASE drupal'
   - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''${mysql_password}'\'
+  # Drupal
+  - export DRUPAL_ROOT=/var/www/drupal
+  - composer create-project
+    drupal-composer/drupal-project:8.x-dev
+    $DRUPAL_ROOT
+    --stability dev
+    --no-interaction
+  - cd $DRUPAL_ROOT
+  - composer require drupal/devel:~1.0
 
 swap:
   filename: /swap.img
