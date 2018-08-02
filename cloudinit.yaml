@@ -70,11 +70,11 @@ swap:
 write_files:
   - path: /etc/apache2/sites-available/drupal.conf
     permissions: '0644'
-  - content: |
+    content: |
       Listen 8080
       <VirtualHost *:8080>
-        DocumentRoot /var/www/drupal
-        <Directory /var/www/drupal>
+        DocumentRoot /var/www/drupal/web
+        <Directory /var/www/drupal/web>
           AllowOverride all
         </Directory>
         ErrorLog $APACHE_LOG_DIR/drupal_error.log
