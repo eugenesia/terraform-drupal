@@ -32,6 +32,8 @@ data template_file userdata {
     swap_bytes = "${var.swap_size * 1073741824}"
 
     # Allow it to grow to another GB.
-    swap_bytes_max = "${(var.swap_size +1) * 1073741824}"
+    swap_bytes_max = "${(var.swap_size + 1) * 1073741824}"
+
+    php_ver = "${var.php_version}"
   }
 }

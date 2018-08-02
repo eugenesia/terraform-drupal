@@ -16,3 +16,8 @@ variable server_name {
   description = "Name of server."
   default     = "drupal1"
 }
+
+variable php_version {
+  description = "PHP version."
+  default     = "7.2"
+}
