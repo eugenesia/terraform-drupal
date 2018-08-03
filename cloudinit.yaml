@@ -46,6 +46,11 @@ runcmd:
   - wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
   - chmod +x drush.phar
   - mv drush.phar /usr/local/bin/drush
+  # Fallback to global Drush
+  - echo DRUSH_LAUNCHER_FALLBACK=$(composer global config home)/vendor/bin/drush >> ~/.bashrc
+
+  # Global Drush
+  - cgr drush/drush:8
 
   # MySQL setup
   # - mysql -e 'CREATE DATABASE drupal'
