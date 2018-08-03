@@ -57,13 +57,13 @@ runcmd:
   # - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''${mysql_password}'\'
 
   # Drupal - download
-  - export DRUPAL_ROOT=/var/www/drupal
+  - export DRUPAL_HOME=/var/www/drupal
   - composer create-project
     drupal-composer/drupal-project:8.x-dev
-    $DRUPAL_ROOT
+    $DRUPAL_HOME
     --stability dev
     --no-interaction
-  - cd $DRUPAL_ROOT
+  - cd $DRUPAL_HOME
   - composer require drupal/devel:~1.0
 
   # Drupal - install
