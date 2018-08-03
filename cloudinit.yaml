@@ -25,6 +25,9 @@ packages:
   - php${php_ver}-xml
   - php${php_ver}-zip
 
+  # Apache mods
+  - libapache2-mod-php${php_ver}
+
 runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
