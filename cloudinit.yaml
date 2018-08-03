@@ -50,7 +50,7 @@ runcmd:
   - echo export DRUSH_LAUNCHER_FALLBACK=$(composer global config home)/vendor/bin/drush >> ~/.bashrc
 
   # Global Drush
-  - cgr drush/drush:8
+  - cgr drush/drush:8.x
 
   # MySQL setup
   # - mysql -e 'CREATE DATABASE drupal'
