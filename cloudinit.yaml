@@ -45,6 +45,7 @@ runcmd:
 
   # Drupal - download
   - export DRUPAL_HOME=/var/www/drupal
+  - export HOME=/root
   - composer create-project
     drupal-composer/drupal-project:8.x-dev
     $DRUPAL_HOME
