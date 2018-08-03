@@ -32,13 +32,17 @@ packages:
 runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
+
   # Composer
   - export HOME=/root
   - composer global require consolidation/cgr
   - echo PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
   - . ~/.bashrc
+
   # Drush
-  - cgr drush/drush
+  # Don't install global Drush as D8 has its own Drush.
+  # - cgr drush/drush
+
   # MySQL setup
   # - mysql -e 'CREATE DATABASE drupal'
   # - mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO drupal@localhost IDENTIFIED BY '\''${mysql_password}'\'
@@ -54,6 +58,7 @@ runcmd:
   - composer require drupal/devel:~1.0
 
   # Drupal - install
+  # Need '=' for options in Drush.
   - drush site:install
     --db-url='mysql://drupal:${mysql_password}@localhost/drupal'
     --db-su=root
