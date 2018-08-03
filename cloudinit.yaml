@@ -9,9 +9,8 @@ apt:
 
 packages:
   # Lamp
-  - tasksel
-  # - apache2
-  # - apache2-bin
+  - apache2
+  - apache2-bin
   - lamp-server^
 
   # Dev tools
@@ -27,7 +26,7 @@ packages:
   - php${php_ver}-zip
 
   # Apache mods
-  # - libapache2-mod-php${php_ver}
+  - libapache2-mod-php${php_ver}
 
 runcmd:
   # Change swappiness
