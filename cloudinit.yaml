@@ -33,11 +33,9 @@ runcmd:
   # Change swappiness
   - echo 'vm.swappiness=10' >> /etc/sysctl.conf
 
-  # # CGR
-  # - export HOME=/root
-  # - composer global require consolidation/cgr
-  # - echo export PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
-  # - . ~/.bashrc
+  # Required for Composer
+  - export HOME=/root
+
 
 
   ##############################################################################
@@ -45,7 +43,6 @@ runcmd:
 
   # Drupal - download
   - export DRUPAL_HOME=/var/www/drupal
-  - export HOME=/root
   - composer create-project
     drupal-composer/drupal-project:8.x-dev
     $DRUPAL_HOME
@@ -62,24 +59,37 @@ runcmd:
     --account-pass=${drupal_password}
   
   ##############################################################################
-  # Drush - 8.x
+  # Drush 9 - remove
+
+  # Delete site-local Drush 9 as it conflicts with global Drush.
+  - composer remove drush/drush
 
   # Delete Drush PolicyCommands as they break Drush 8.x
   # https://github.com/drush-ops/drush/issues/3456
-  - rm ./drush/Commands/PolicyCommands.php
+  - rm $DRUPAL_HOME/drush/Commands/PolicyCommands.php
 
-  # Downgrade Drush 9 to 8.x in site as it's the only one that works with Site Audit
-  - composer require drush/drush:8.x
+  ##############################################################################
+  # Drush 8.x - install global
+
+  # CGR - for global Drush, required for Site_Audit.
+  - composer global require consolidation/cgr
+  - echo export PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
+  - . ~/.bashrc
+
+  # Install global Drush 8.x
+  - cgr drush/drush:8.x
 
   # Drush Launcher - run site-local Drush no need to type vendor/bin/drush
   # https://github.com/drush-ops/drush-launcher
   - wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
   - chmod +x drush.phar
   - mv drush.phar /usr/local/bin/drush
+  # Fallback to global Drush instead of failing when no site-local Drush.
+  - echo export DRUSH_LAUNCHER_FALLBACK=~/.composer/vendor/bin/drush >> ~/.bashrc
 
   ##############################################################################
-  # Site Audit
-  - cd $DRUPAL_HOME/web
+  # Site Audit - need to install globally as only works with global Drush
+  - cd $HOME
   - drush dl site_audit
   
   ##############################################################################
