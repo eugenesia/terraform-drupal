@@ -36,7 +36,7 @@ runcmd:
   # Composer
   - export HOME=/root
   - composer global require consolidation/cgr
-  - echo PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
+  - echo export PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
   - . ~/.bashrc
 
   # Drush Launcher
@@ -47,7 +47,7 @@ runcmd:
   - chmod +x drush.phar
   - mv drush.phar /usr/local/bin/drush
   # Fallback to global Drush
-  - echo DRUSH_LAUNCHER_FALLBACK=$(composer global config home)/vendor/bin/drush >> ~/.bashrc
+  - echo export DRUSH_LAUNCHER_FALLBACK=$(composer global config home)/vendor/bin/drush >> ~/.bashrc
 
   # Global Drush
   - cgr drush/drush:8
