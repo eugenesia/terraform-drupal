@@ -40,8 +40,8 @@ runcmd:
   - . ~/.bashrc
 
   # Drush
-  # Don't install global Drush as D8 has its own Drush.
-  # - cgr drush/drush
+  # Need global Drush to do drush site:install for D8 site.
+  - cgr drush/drush
 
   # MySQL setup
   # - mysql -e 'CREATE DATABASE drupal'
