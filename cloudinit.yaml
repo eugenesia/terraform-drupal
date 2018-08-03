@@ -63,7 +63,7 @@ runcmd:
 
   # Drupal - install
   # Need '=' for options in Drush.
-  - ../vendor/bin/drush site:install
+  - ./vendor/bin/drush site:install
     --db-url='mysql://drupal:${mysql_password}@localhost/drupal'
     --db-su=root
     --account-pass=${drupal_password}
