@@ -39,10 +39,13 @@ runcmd:
   - echo PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
   - . ~/.bashrc
 
-  # Drush
+  # Drush Launcher
   # Best practice is to require Drush on a per-project basis, see
   # https://github.com/drush-ops/drush-launcher
   # - cgr drush/drush
+  - wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
+  - chmod +x drush.phar
+  - mv drush.phar /usr/local/bin/drush
 
   # MySQL setup
   # - mysql -e 'CREATE DATABASE drupal'
