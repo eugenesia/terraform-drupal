@@ -1,0 +1,120 @@
+#cloud-config
+apt:
+  # Add PHP/Apache sources.
+  sources:
+    source1:
+      source: 'ppa:ondrej/php'
+    source2:
+      source: 'ppa:ondrej/apache2'
+
+packages:
+  # Lamp
+  - lamp-server^
+
+  # Apache and mods
+  - apache2
+  - apache2-bin
+  - libapache2-mod-php${php_ver}
+
+  # Dev tools
+  - composer
+  - git
+
+  # PHP extensions
+  - php${php_ver}-curl
+  - php${php_ver}-gd
+  - php${php_ver}-mbstring
+  - php${php_ver}-mysql
+  - php${php_ver}-xml
+  - php${php_ver}-zip
+
+
+runcmd:
+  # Change swappiness
+  - echo 'vm.swappiness=10' >> /etc/sysctl.conf
+
+  # Required for Composer
+  - export HOME=/root
+
+
+
+  ##############################################################################
+  # Drupal
+
+  # Drupal - download
+  - export DRUPAL_HOME=/var/www/drupal
+  - composer create-project
+    drupal-composer/drupal-project:8.x-dev
+    $DRUPAL_HOME
+    --stability dev
+    --no-interaction
+  - cd $DRUPAL_HOME
+  - composer require drupal/devel:~1.0
+
+  # Drupal - install
+  # Need '=' for options in Drush.
+  - ./vendor/bin/drush site:install
+    --db-url='mysql://drupal:${mysql_password}@localhost/drupal'
+    --db-su=root
+    --account-pass=${drupal_password}
+  
+  ##############################################################################
+  # Drush 9 - remove
+
+  # Delete site-local Drush 9 as it conflicts with global Drush.
+  - composer remove drush/drush
+
+  # Delete Drush PolicyCommands as they break Drush 8.x
+  # https://github.com/drush-ops/drush/issues/3456
+  - rm $DRUPAL_HOME/drush/Commands/PolicyCommands.php
+
+  ##############################################################################
+  # Drush 8.x - install global
+
+  # CGR - for global Drush, required for Site_Audit.
+  - composer global require consolidation/cgr
+  - echo export PATH="$(composer global config home)/vendor/bin:$PATH" >> ~/.bashrc
+  - . ~/.bashrc
+
+  # Install global Drush 8.x
+  - cgr drush/drush:8.x
+
+  # Drush Launcher - run site-local Drush no need to type vendor/bin/drush
+  # https://github.com/drush-ops/drush-launcher
+  - wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
+  - chmod +x drush.phar
+  - mv drush.phar /usr/local/bin/drush
+  # Fallback to global Drush instead of failing when no site-local Drush.
+  - echo export DRUSH_LAUNCHER_FALLBACK=~/.composer/vendor/bin/drush >> ~/.bashrc
+
+  ##############################################################################
+  # Site Audit - need to install globally as only works with global Drush
+  - cd $HOME
+  - drush dl site_audit
+  
+  ##############################################################################
+  # Apache
+  - a2enmod rewrite
+  - a2ensite drupal
+  - systemctl restart apache2
+  
+
+swap:
+  filename: /swap.img
+  size: ${swap_bytes}
+  maxsize: ${swap_bytes_max}
+
+
+write_files:
+  - path: /etc/apache2/sites-available/drupal.conf
+    permissions: '0644'
+    content: |
+      Listen 8080
+      <VirtualHost *:8080>
+        DocumentRoot /var/www/drupal/web
+        <Directory /var/www/drupal/web>
+          AllowOverride all
+        </Directory>
+        ErrorLog $${APACHE_LOG_DIR}/drupal_error.log
+        CustomLog $${APACHE_LOG_DIR}/drupal_access.log combined
+      </VirtualHost>
